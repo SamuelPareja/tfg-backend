@@ -1,11 +1,1 @@
-
-node_modules/
 .env
-.env.local
-dist/
-build/
-coverage/
-.DS_Store
-.vscode/
-npm-debug.log
-yarn-error.log

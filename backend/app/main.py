@@ -1,44 +1,62 @@
-# Importa FastAPI para crear la aplicación web
-from fastapi import FastAPI
+"""
+Punto de entrada principal del backend de Aquinielator.
 
-# Importa el middleware CORS para permitir comunicación con el frontend
+Este archivo crea la aplicación FastAPI, configura CORS,
+registra los routers principales y define endpoints básicos
+como el health check.
+"""
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# Importa las rutas de predicción
+from app.core.config import settings
 from app.routes.predict import router as predict_router
-
-# Importa las rutas de equipos
 from app.routes.teams import router as teams_router
-
-# “Este archivo es el punto de entrada del backend. Configura FastAPI,
-#  habilita CORS para comunicarse con React y registra las rutas de la aplicación.”
-# “CORS permite que el frontend y el backend se comuniquen aunque estén en distintos puertos.”
+from app.routes.database_test import router as database_test_router
+from app.routes.auth import router as auth_router
 
 
-# Crea la aplicación FastAPI con un título
-app = FastAPI(title="Aquinielator API")
+# Crea la aplicación FastAPI.
+# FastAPI genera automáticamente documentación Swagger en /docs.
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.PROJECT_VERSION,
+    description="API para generar predicciones de quinielas de fútbol usando modelos clásicos, ML e IA.",
+)
 
-# Configura CORS (Cross-Origin Resource Sharing)
-# Permite que el frontend (React) pueda comunicarse con el backend
+
+# Configuración CORS.
+# Permite que el frontend pueda comunicarse con el backend.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        # Permite peticiones desde el frontend en desarrollo
+        settings.FRONTEND_URL,
         "http://localhost:5173",
         "http://127.0.0.1:5173",
     ],
     allow_credentials=True,
-    allow_methods=["*"],  # Permite todos los métodos HTTP (GET, POST, etc.)
-    allow_headers=["*"],  # Permite todas las cabeceras
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Endpoint de prueba para comprobar que la API está funcionando
-@app.get("/health")
+
+@app.get("/health", tags=["Health"])
 def health():
-    return {"status": "ok"}
+    """
+    Comprueba si la API está funcionando correctamente.
 
-# Registra las rutas de predicción bajo el prefijo /api
-app.include_router(predict_router, prefix="/api")
+    Returns:
+        dict: Estado básico del backend.
+    """
+    return {
+        "status": "ok",
+        "project": settings.PROJECT_NAME,
+        "version": settings.PROJECT_VERSION,
+    }
 
-# Registra las rutas de equipos bajo el prefijo /api
-app.include_router(teams_router, prefix="/api")
+
+# Rutas principales de la API.
+app.include_router(predict_router, prefix="/api", tags=["Predicciones"])
+app.include_router(teams_router, prefix="/api", tags=["Equipos"])
+app.include_router(database_test_router, prefix="/api")
+app.include_router(auth_router, prefix="/api")
