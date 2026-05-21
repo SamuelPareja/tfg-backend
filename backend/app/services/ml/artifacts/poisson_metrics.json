@@ -1,0 +1,6 @@
+{
+  "model": "poisson",
+  "samples": 290,
+  "accuracy": 0.4966,
+  "log_loss": 1.1571
+}

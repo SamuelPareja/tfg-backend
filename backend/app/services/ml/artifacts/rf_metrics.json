@@ -1,0 +1,6 @@
+{
+  "train_size": 203,
+  "validation_size": 87,
+  "accuracy": 0.4828,
+  "log_loss": 1.0349
+}

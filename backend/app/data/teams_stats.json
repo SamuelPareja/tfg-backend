@@ -1,0 +1,142 @@
+{
+  "Athletic Club": {
+    "puntos_recientes": 10,
+    "goles_favor": 8,
+    "goles_contra": 5,
+    "rendimiento_casa": 7,
+    "rendimiento_fuera": 6
+  },
+  "Atlético de Madrid": {
+    "puntos_recientes": 12,
+    "goles_favor": 9,
+    "goles_contra": 4,
+    "rendimiento_casa": 8,
+    "rendimiento_fuera": 7
+  },
+  "CA Osasuna": {
+    "puntos_recientes": 8,
+    "goles_favor": 6,
+    "goles_contra": 6,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 5
+  },
+  "Celta": {
+    "puntos_recientes": 9,
+    "goles_favor": 7,
+    "goles_contra": 6,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 5
+  },
+  "Deportivo Alavés": {
+    "puntos_recientes": 7,
+    "goles_favor": 5,
+    "goles_contra": 7,
+    "rendimiento_casa": 5,
+    "rendimiento_fuera": 4
+  },
+  "Elche CF": {
+    "puntos_recientes": 8,
+    "goles_favor": 6,
+    "goles_contra": 6,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 4
+  },
+  "FC Barcelona": {
+    "puntos_recientes": 13,
+    "goles_favor": 11,
+    "goles_contra": 4,
+    "rendimiento_casa": 8,
+    "rendimiento_fuera": 7
+  },
+  "Getafe CF": {
+    "puntos_recientes": 7,
+    "goles_favor": 5,
+    "goles_contra": 6,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 4
+  },
+  "Girona FC": {
+    "puntos_recientes": 9,
+    "goles_favor": 8,
+    "goles_contra": 7,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 5
+  },
+  "Levante UD": {
+    "puntos_recientes": 8,
+    "goles_favor": 6,
+    "goles_contra": 7,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 4
+  },
+  "Rayo Vallecano": {
+    "puntos_recientes": 8,
+    "goles_favor": 6,
+    "goles_contra": 6,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 5
+  },
+  "RCD Espanyol de Barcelona": {
+    "puntos_recientes": 7,
+    "goles_favor": 6,
+    "goles_contra": 7,
+    "rendimiento_casa": 5,
+    "rendimiento_fuera": 4
+  },
+  "RCD Mallorca": {
+    "puntos_recientes": 8,
+    "goles_favor": 6,
+    "goles_contra": 6,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 5
+  },
+  "Real Betis": {
+    "puntos_recientes": 10,
+    "goles_favor": 8,
+    "goles_contra": 5,
+    "rendimiento_casa": 7,
+    "rendimiento_fuera": 6
+  },
+  "Real Madrid": {
+    "puntos_recientes": 13,
+    "goles_favor": 10,
+    "goles_contra": 4,
+    "rendimiento_casa": 8,
+    "rendimiento_fuera": 7
+  },
+  "Real Oviedo": {
+    "puntos_recientes": 7,
+    "goles_favor": 5,
+    "goles_contra": 7,
+    "rendimiento_casa": 5,
+    "rendimiento_fuera": 4
+  },
+  "Real Sociedad": {
+    "puntos_recientes": 10,
+    "goles_favor": 7,
+    "goles_contra": 5,
+    "rendimiento_casa": 7,
+    "rendimiento_fuera": 6
+  },
+  "Sevilla FC": {
+    "puntos_recientes": 7,
+    "goles_favor": 6,
+    "goles_contra": 8,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 4
+  },
+  "Valencia CF": {
+    "puntos_recientes": 8,
+    "goles_favor": 7,
+    "goles_contra": 7,
+    "rendimiento_casa": 6,
+    "rendimiento_fuera": 5
+  },
+  "Villarreal CF": {
+    "puntos_recientes": 11,
+    "goles_favor": 9,
+    "goles_contra": 5,
+    "rendimiento_casa": 7,
+    "rendimiento_fuera": 6
+  }
+}
