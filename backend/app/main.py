@@ -14,6 +14,8 @@ from app.routes.predict import router as predict_router
 from app.routes.teams import router as teams_router
 from app.routes.database_test import router as database_test_router
 from app.routes.auth import router as auth_router
+from app.routes.predictions import router as predictions_router
+from app.routes.favorites import router as favorites_router
 
 
 # Crea la aplicación FastAPI.
@@ -60,3 +62,5 @@ app.include_router(predict_router, prefix="/api", tags=["Predicciones"])
 app.include_router(teams_router, prefix="/api", tags=["Equipos"])
 app.include_router(database_test_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
+app.include_router(predictions_router, prefix="/api")
+app.include_router(favorites_router, prefix="/api")
