@@ -4,7 +4,7 @@ from typing import List, Optional, Dict
 
 class MatchInput(BaseModel):
     local: str = Field(..., example="Real Madrid")
-    visitante: str = Field(..., example="Barcelona")
+    visitante: str = Field(..., example="FC Barcelona")
 
 
 class QuinielaRequest(BaseModel):

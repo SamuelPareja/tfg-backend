@@ -1,17 +1,31 @@
-# Importa APIRouter para crear rutas independientes en FastAPI
-from fastapi import APIRouter
+"""
+Rutas relacionadas con equipos.
 
-# Importa la función que devuelve la lista de equipos
-from app.services.data_service import get_all_teams
+Este endpoint devuelve los equipos desde MySQL para que el frontend
+pueda rellenar desplegables y trabajar con nombres consistentes.
+"""
 
-# Crea un router para agrupar endpoints relacionados
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
+from app.database.connection import get_db
+from app.services.team_service import list_teams
+
+
 router = APIRouter()
 
-# “Este endpoint devuelve la lista de equipos desde el backend
-#  para que el frontend pueda rellenar los desplegables.”
 
-# Endpoint GET /teams
 @router.get("/teams")
-def list_teams():
-    # Devuelve un JSON con la lista de equipos
-    return {"equipos": get_all_teams()}
+def get_teams(db: Session = Depends(get_db)):
+    """
+    Devuelve los equipos disponibles.
+
+    Returns:
+        dict: Lista simple de nombres y lista detallada de equipos.
+    """
+    teams = list_teams(db)
+
+    return {
+        "equipos": [team.name for team in teams],
+        "equipos_detalle": teams,
+    }

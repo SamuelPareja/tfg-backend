@@ -17,28 +17,98 @@ DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "teams_stats.json"
 # Diccionario de alias para normalizar nombres de equipos.
 # Permite aceptar nombres comunes y convertirlos a su nombre oficial.
 TEAM_ALIASES = {
-    "Barcelona": "FC Barcelona",
-    "Barça": "FC Barcelona",
+    # Real Madrid
     "Real Madrid": "Real Madrid",
     "Madrid": "Real Madrid",
-    "Sevilla": "Sevilla FC",
-    "Valencia": "Valencia CF",
-    "Betis": "Real Betis",
-    "Atleti": "Atlético de Madrid",
+
+    # Barcelona
+    "FC Barcelona": "FC Barcelona",
+    "Barcelona": "FC Barcelona",
+    "Barça": "FC Barcelona",
+    "Barca": "FC Barcelona",
+
+    # Atlético de Madrid
+    "Atlético de Madrid": "Atlético de Madrid",
+    "Atletico de Madrid": "Atlético de Madrid",
+    "Atlético": "Atlético de Madrid",
     "Atletico": "Atlético de Madrid",
+    "Atleti": "Atlético de Madrid",
+    "Ath Madrid": "Atlético de Madrid",
+
+    # Sevilla
+    "Sevilla": "Sevilla FC",
+    "Sevilla FC": "Sevilla FC",
+
+    # Betis
+    "Betis": "Real Betis",
+    "Real Betis": "Real Betis",
+
+    # Real Sociedad
+    "Real Sociedad": "Real Sociedad",
+    "Sociedad": "Real Sociedad",
+
+    # Villarreal
+    "Villarreal": "Villarreal CF",
+    "Villarreal CF": "Villarreal CF",
+
+    # Athletic
+    "Athletic Club": "Athletic Club",
     "Athletic": "Athletic Club",
     "Athletic Bilbao": "Athletic Club",
-    "Villarreal": "Villarreal CF",
-    "Getafe": "Getafe CF",
-    "Espanyol": "RCD Espanyol de Barcelona",
-    "Mallorca": "RCD Mallorca",
-    "Alaves": "Deportivo Alavés",
-    "Girona": "Girona FC",
-    "Celta": "Celta",
+    "Ath Bilbao": "Athletic Club",
+
+    # Valencia
+    "Valencia": "Valencia CF",
+    "Valencia CF": "Valencia CF",
+
+    # Osasuna
     "Osasuna": "CA Osasuna",
+    "CA Osasuna": "CA Osasuna",
+
+    # Celta
+    "Celta": "Celta",
+    "Celta de Vigo": "Celta",
+
+    # Rayo
+    "Rayo Vallecano": "Rayo Vallecano",
     "Rayo": "Rayo Vallecano",
+    "Vallecano": "Rayo Vallecano",
+
+    # Alavés
+    "Alavés": "Deportivo Alavés",
+    "Alaves": "Deportivo Alavés",
+    "Deportivo Alavés": "Deportivo Alavés",
+    "Deportivo Alaves": "Deportivo Alavés",
+
+    # Espanyol
+    "RCD Espanyol": "RCD Espanyol de Barcelona",
+    "Espanyol": "RCD Espanyol de Barcelona",
+    "Espanol": "RCD Espanyol de Barcelona",
+    "RCD Espanyol de Barcelona": "RCD Espanyol de Barcelona",
+
+    # Elche
+    "Elche": "Elche CF",
+    "Elche CF": "Elche CF",
+
+    # Getafe
+    "Getafe": "Getafe CF",
+    "Getafe CF": "Getafe CF",
+
+    # Mallorca
+    "Mallorca": "RCD Mallorca",
+    "RCD Mallorca": "RCD Mallorca",
+
+    # Levante
     "Levante": "Levante UD",
-    "Oviedo": "Real Oviedo"
+    "Levante UD": "Levante UD",
+
+    # Oviedo
+    "Oviedo": "Real Oviedo",
+    "Real Oviedo": "Real Oviedo",
+
+    # Girona
+    "Girona": "Girona FC",
+    "Girona FC": "Girona FC",
 }
 
 
@@ -62,16 +132,24 @@ def load_team_stats() -> dict:
 
 # Función que devuelve todos los equipos disponibles
 def get_all_teams() -> list:
-    # Carga las estadísticas completas
-    team_stats = load_team_stats()
+    """
+    Devuelve todos los equipos disponibles en el archivo JSON de estadísticas.
 
-    # Devuelve las claves del diccionario ordenadas alfabéticamente
+    Esta función se mantiene por compatibilidad, aunque el endpoint /api/teams
+    ahora obtiene los equipos desde MySQL.
+    """
+    team_stats = load_team_stats()
     return sorted(team_stats.keys())
 
 
 # Función que devuelve las estadísticas de un equipo concreto
 def get_team_stats(team_name: str) -> dict:
-    # Estadísticas por defecto si el equipo no existe en el JSON
+    """
+    Devuelve las estadísticas de un equipo concreto.
+
+    Si el equipo no existe en el JSON, devuelve estadísticas por defecto
+    para evitar que la predicción falle.
+    """
     default_stats = {
         "puntos_recientes": 9,
         "goles_favor": 5,
@@ -80,12 +158,10 @@ def get_team_stats(team_name: str) -> dict:
         "rendimiento_fuera": 5
     }
 
-    # Carga todas las estadísticas
     team_stats = load_team_stats()
+    normalized_name = normalize_team_name(team_name)
 
-    # Devuelve las estadísticas del equipo si existe;
-    # si no, devuelve las estadísticas por defecto
-    return team_stats.get(team_name, default_stats)
+    return team_stats.get(normalized_name, default_stats)
 
 
 # Función que prepara los datos de un partido completo

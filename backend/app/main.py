@@ -16,6 +16,7 @@ from app.routes.database_test import router as database_test_router
 from app.routes.auth import router as auth_router
 from app.routes.predictions import router as predictions_router
 from app.routes.favorites import router as favorites_router
+from app.routes.info import router as info_router
 
 
 # Crea la aplicación FastAPI.
@@ -42,6 +43,23 @@ app.add_middleware(
 )
 
 
+@app.get("/", tags=["Información"])
+def root():
+    """
+    Endpoint raíz de la API.
+
+    Sirve para comprobar rápidamente que el backend está activo
+    y para indicar dónde está la documentación Swagger.
+    """
+    return {
+        "message": "Aquinielator API funcionando correctamente",
+        "docs": "/docs",
+        "redoc": "/redoc",
+        "health": "/health",
+        "api_info": "/api/info",
+    }
+
+
 @app.get("/health", tags=["Health"])
 def health():
     """
@@ -64,3 +82,4 @@ app.include_router(database_test_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
 app.include_router(predictions_router, prefix="/api")
 app.include_router(favorites_router, prefix="/api")
+app.include_router(info_router, prefix="/api")
