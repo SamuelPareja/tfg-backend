@@ -7,6 +7,7 @@ predicciones y partidos predichos.
 
 from sqlalchemy.orm import Session, joinedload
 
+from app.models.favorite import Favorite
 from app.models.prediction import Prediction, PredictionMatch
 from app.schemas.prediction_history_schema import PredictionCreateRequest
 
@@ -113,6 +114,9 @@ def delete_prediction_by_id_and_user(
     """
     Elimina una predicción concreta de un usuario.
 
+    Antes de borrar la predicción, elimina sus favoritos asociados para
+    evitar conflictos con la restricción NOT NULL de favorites.prediction_id.
+
     Args:
         db (Session): Sesión de base de datos.
         prediction_id (int): ID de la predicción.
@@ -125,6 +129,11 @@ def delete_prediction_by_id_and_user(
 
     if prediction is None:
         return False
+
+    db.query(Favorite).filter(
+        Favorite.prediction_id == prediction_id,
+        Favorite.user_id == user_id,
+    ).delete(synchronize_session=False)
 
     db.delete(prediction)
     db.commit()

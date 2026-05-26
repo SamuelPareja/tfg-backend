@@ -17,6 +17,7 @@ from app.routes.auth import router as auth_router
 from app.routes.predictions import router as predictions_router
 from app.routes.favorites import router as favorites_router
 from app.routes.info import router as info_router
+from app.routes.users import router as users_router
 
 
 # Crea la aplicación FastAPI.
@@ -36,6 +37,8 @@ app.add_middleware(
         settings.FRONTEND_URL,
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:8080",
+        "http://127.0.0.1:8080",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -83,3 +86,4 @@ app.include_router(auth_router, prefix="/api")
 app.include_router(predictions_router, prefix="/api")
 app.include_router(favorites_router, prefix="/api")
 app.include_router(info_router, prefix="/api")
+app.include_router(users_router, prefix="/api")

@@ -40,7 +40,11 @@ class Prediction(Base):
         back_populates="prediction",
         cascade="all, delete-orphan",
     )
-    favorites = relationship("Favorite", back_populates="prediction")
+    favorites = relationship(
+    "Favorite",
+    back_populates="prediction",
+    cascade="all, delete-orphan",
+    )
     audits = relationship("PredictionAudit", back_populates="prediction")
 
 
